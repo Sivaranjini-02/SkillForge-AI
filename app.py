@@ -437,8 +437,16 @@ st.markdown(
 # 6. SIDEBAR LEARNER PROFILE & BLUEPRINT EXPORTER
 # -----------------------------------------------------------------------------
 st.sidebar.markdown("### 🔑 Authentication")
+default_api_key = ""
+try:
+    if hasattr(st, "secrets") and "GEMINI_API_KEY" in st.secrets:
+        default_api_key = st.secrets["GEMINI_API_KEY"]
+except Exception:
+    default_api_key = ""
+
 gemini_api_key = st.sidebar.text_input(
     "Gemini API Key",
+    value=default_api_key,
     type="password",
     placeholder="Enter Google Gemini API Key...",
     help="Powers live Gemini 3.8 Flash 4-Agent consensus, resume parsing, and interview coaching.",
